@@ -50,3 +50,5 @@ $Calory_Group_Size = sizeof($Calorie_Groups);
 $Second_Highest_Number_Of_Calories = $Calorie_Groups[1];
 $Third_Highest_Number_Of_Calories = $Calorie_Groups[2];
 $Top_Three_Highest_Number_Of_Calories_Combined = $Highest_Number_Of_Calories + $Second_Highest_Number_Of_Calories + $Third_Highest_Number_Of_Calories;
+
+printf("The top three elves are carrying %d, %d and %d calories respectively. Combined, this makes a total of %d calories." . PHP_EOL, $Highest_Number_Of_Calories, $Second_Highest_Number_Of_Calories, $Third_Highest_Number_Of_Calories, $Top_Three_Highest_Number_Of_Calories_Combined);
