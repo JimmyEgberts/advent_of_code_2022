@@ -41,3 +41,12 @@ $Elf_Number = array_search($Highest_Number_Of_Calories, $Calorie_Groups) + 1;
 $Elf_Number_Suffix = Get_Ordinal_Suffix($Elf_Number);
 
 printf("The elf carrying the most calories is the %s elf. They are carrying %d calories." . PHP_EOL, $Elf_Number . $Elf_Number_Suffix, $Highest_Number_Of_Calories);
+
+// Part two
+
+rsort($Calorie_Groups);
+
+$Calory_Group_Size = sizeof($Calorie_Groups);
+$Second_Highest_Number_Of_Calories = $Calorie_Groups[1];
+$Third_Highest_Number_Of_Calories = $Calorie_Groups[2];
+$Top_Three_Highest_Number_Of_Calories_Combined = $Highest_Number_Of_Calories + $Second_Highest_Number_Of_Calories + $Third_Highest_Number_Of_Calories;
