@@ -25,6 +25,17 @@ function Get_Calorie_Groups($Calorie_Array): array
     return $Calorie_Groups;
 }
 
+function Get_Ordinal_Suffix($Number): string
+{
+    $Ordinal_Suffixes = array("th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th");
+    $Elf_Number_Suffix = ($Number % 100) >= 11 && ($Number % 100) <= 13 ? "th" : $Ordinal_Suffixes[$Number % 10];
+    return $Elf_Number_Suffix;
+}
+
 $Input = Read_Input("input.txt");
 $Calorie_Array = explode(PHP_EOL, $Input);
 $Calorie_Groups = Get_Calorie_Groups($Calorie_Array);
+
+$Highest_Number_Of_Calories = max($Calorie_Groups);
+$Elf_Number = array_search($Highest_Number_Of_Calories, $Calorie_Groups) + 1;
+$Elf_Number_Suffix = Get_Ordinal_Suffix($Elf_Number);
