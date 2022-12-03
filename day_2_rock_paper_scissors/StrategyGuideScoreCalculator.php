@@ -80,3 +80,6 @@ function Get_Score_Of_Decrypted_Strategy_Guide($Strategy_Guide_Array): int
     }
     return $Score;
 }
+
+$Decrypted_Strategy_Guide_Score = Get_Score_Of_Decrypted_Strategy_Guide($Strategy_Guide_Array);
+printf("The final score after following the decrypted strategy guide and playing %d matches of rock papers, scissors is: %d." . PHP_EOL, sizeof($Strategy_Guide_Array), $Decrypted_Strategy_Guide_Score);
