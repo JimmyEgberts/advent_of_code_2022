@@ -23,9 +23,9 @@ function Get_Score_Of_Strategy_Guide($Strategy_Array): int
 {
     $Strategy_Score_Matrix =
     [
-        [3, 0, 6],
-        [6, 3, 0],
-        [0, 6, 3]
+        [3, 6, 0],
+        [0, 3, 6],
+        [6, 0, 3]
     ];
 
     $Score = 0;
