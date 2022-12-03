@@ -51,3 +51,32 @@ $Strategy_Guide_Array = explode(PHP_EOL, $Input);
 $Strategy_Guide_Score = Get_Score_Of_Strategy_Guide($Strategy_Guide_Array);
 
 printf("The final score after following the strategy guide and playing %d matches of rock papers, scissors is: %d." . PHP_EOL, sizeof($Strategy_Guide_Array), $Strategy_Guide_Score);
+
+// Part two
+
+function Get_Score_Of_Decrypted_Strategy_Guide($Strategy_Guide_Array): int
+{
+    $Strategy_Score_Matrix =
+    [
+        [3, 6, 0],
+        [0, 3, 6],
+        [6, 0, 3]
+    ];
+
+    $Score = 0;
+    foreach ($Strategy_Guide_Array as $Strategy) {
+        $Opponent_Shape       = substr($Strategy, 0, 1);
+        $Encrypted_End_Result = substr($Strategy, 2, 3);
+        $Decrypted_End_Result = match ($Encrypted_End_Result) {
+            "X", => 0,
+            "Y", => 3,
+            "Z", => 6,
+        };
+    
+        $Matrix_X = Get_Score_Matrix_Coordinate($Opponent_Shape);
+
+        $Score += $Decrypted_End_Result;
+        $Score += array_search($Decrypted_End_Result, $Strategy_Score_Matrix[$Matrix_X]) + 1;
+    }
+    return $Score;
+}
