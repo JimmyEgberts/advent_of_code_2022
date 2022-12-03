@@ -10,7 +10,7 @@ function Read_Input(string $File_Path): string
     return $Input;
 }
 
-function Get_Matrix_Coordinate($Character): int
+function Get_Score_Matrix_Coordinate($Character): int
 {
     return match ($Character) {
         "X", "A" => 0,
@@ -30,11 +30,11 @@ function Get_Score_Of_Strategy_Guide($Strategy_Guide_Array): int
 
     $Score = 0;
     foreach ($Strategy_Guide_Array as $Strategy) {
-        $Shape    = substr($Strategy, 0, 1);
-        $Response = substr($Strategy, 2, 3);
+        $Opponent_Shape = substr($Strategy, 0, 1);
+        $Response       = substr($Strategy, 2, 3);
 
-        $X = Get_Matrix_Coordinate($Shape);
-        $Y = Get_Matrix_Coordinate($Response);
+        $X = Get_Score_Matrix_Coordinate($Opponent_Shape);
+        $Y = Get_Score_Matrix_Coordinate($Response);
     
         $Score += $Strategy_Score_Matrix[$X][$Y];
         $Score += match ($Response) {
