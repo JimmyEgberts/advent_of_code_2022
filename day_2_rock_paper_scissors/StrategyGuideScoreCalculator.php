@@ -19,7 +19,7 @@ function Get_Matrix_Coordinate($Character): int
     };
 }
 
-function Get_Score_Of_Strategy_Guide($Strategy_Array): int
+function Get_Score_Of_Strategy_Guide($Strategy_Guide_Array): int
 {
     $Strategy_Score_Matrix =
     [
@@ -29,7 +29,7 @@ function Get_Score_Of_Strategy_Guide($Strategy_Array): int
     ];
 
     $Score = 0;
-    foreach ($Strategy_Array as $Strategy) {
+    foreach ($Strategy_Guide_Array as $Strategy) {
         $Shape    = substr($Strategy, 0, 1);
         $Response = substr($Strategy, 2, 3);
 
@@ -48,16 +48,6 @@ function Get_Score_Of_Strategy_Guide($Strategy_Array): int
 
 $Input = Read_Input("input.txt");
 $Strategy_Guide_Array = explode(PHP_EOL, $Input);
-$Strategy_Guide_Score = Get_Score_Of_Strategy_Guide($Strategy_Array);
+$Strategy_Guide_Score = Get_Score_Of_Strategy_Guide($Strategy_Guide_Array);
 
-
-
-
-
-
-
-
-// printf("The elf carrying the most calories is the %s elf. They are carrying %d calories." . PHP_EOL, $Elf_Number . $Elf_Number_Suffix, $Highest_Number_Of_Calories);
-
-
-// printf("The top three elves are carrying %d, %d and %d calories respectively. Combined, this makes a total of %d calories." . PHP_EOL, $Highest_Number_Of_Calories, $Second_Highest_Number_Of_Calories, $Third_Highest_Number_Of_Calories, $Top_Three_Highest_Number_Of_Calories_Combined);
+printf("The final score after following the strategy guide and playing %d matches of rock papers, scissors is: %d." . PHP_EOL, sizeof($Strategy_Guide_Array), $Strategy_Guide_Score);
