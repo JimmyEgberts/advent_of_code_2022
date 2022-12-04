@@ -44,6 +44,7 @@ function Find_Double_Item_Types($Group_Array): string
     $Splitted_Group = [];
     foreach ($Group_Array as $Group)
     {
+        $Group_String = count_chars($Group, 3);
         if (sizeof($Splitted_Group) === 0)
         {
             $Splitted_Group = str_split($Group_String);
