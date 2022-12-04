@@ -98,3 +98,15 @@ foreach ($Rucksack_Compartments_Array as $Compartments_Array)
 
 printf("The sum of priorities of the item types that appear in both compartments of each rucksack is: %d." . PHP_EOL, $Double_Item_Priority_Score);
 
+// Part two
+
+$Badge_Priority_Score = 0;
+
+$Groups = array_chunk($Rucksack_Array, 3);
+foreach ($Groups as $Group)
+{
+    $Badge_Item_Type = Find_Double_Item_Types($Group);
+    $Badge_Priority_Score += Get_Priority_Value($Badge_Item_Type);
+}
+
+printf("The sum of priorities of all badge items is: %d." . PHP_EOL, $Badge_Priority_Score);
