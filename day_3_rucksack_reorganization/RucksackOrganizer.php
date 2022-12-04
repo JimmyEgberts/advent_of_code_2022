@@ -39,6 +39,45 @@ function Find_Double_Item_Type($Compartments_Array): string
     return "";
 }
 
+function Find_Double_Item_Types($Group_Array): string
+{
+    $Group_Count = sizeof($Group_Array);
+    $Possible_Badge_Array = [];
+    $Splitted_Group = [];
+    foreach ($Group_Array as $Group)
+    {
+        if (sizeof($Splitted_Group) === 0)
+        {
+            $Splitted_Group = str_split($Group);
+            foreach ($Splitted_Group as $Item_Type)
+            {
+                $Possible_Badge_Array[$Item_Type] = 1;
+            }
+        }
+        else
+        {
+            foreach ($Splitted_Group as $Item_Type)
+            {
+                $Item_Type_Is_Double = str_contains($Group, $Item_Type);
+                if ($Item_Type_Is_Double)
+                {
+                    $Possible_Badge_Array[$Item_Type] += 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    foreach ($Possible_Badge_Array as $Item_Type => $Count) {
+        if ($Count == sizeof($Group_Array)) {
+            return $Item_Type;
+        }
+    }
+
+    return "";
+}
+
+
 function Get_Priority_Value($Item_Type): int
 {
     $Priority_List = array_merge(range('a', 'z'), range('A', 'Z'));
@@ -52,7 +91,7 @@ $Input = Read_Input("input.txt");
 $Rucksack_Compartments_Array = Create_Rucksack_Array($Input);
 foreach ($Rucksack_Compartments_Array as $Compartments_Array)
 {
-    $Double_Item_Type = Find_Double_Item_Type($Compartments_Array);
+    $Double_Item_Type = Find_Double_Item_Types($Compartments_Array);
     if ($Double_Item_Type) {
         $Priority_Score += Get_Priority_Value($Double_Item_Type);
     }
