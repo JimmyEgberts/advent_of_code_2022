@@ -10,9 +10,8 @@ function Read_Input(string $File_Path): string
     return $Input;
 }
 
-function Create_Rucksack_Array($Input): array
+function Seperate_Rucksack_Compartments($Rucksack_Array): array
 {
-    $Rucksack_Array = explode(PHP_EOL, $Input);
     $Rucksack_Compartments_Array = [];
     foreach ($Rucksack_Array as $Rucksack)
     {
@@ -41,14 +40,13 @@ function Find_Double_Item_Type($Compartments_Array): string
 
 function Find_Double_Item_Types($Group_Array): string
 {
-    $Group_Count = sizeof($Group_Array);
     $Possible_Badge_Array = [];
     $Splitted_Group = [];
     foreach ($Group_Array as $Group)
     {
         if (sizeof($Splitted_Group) === 0)
         {
-            $Splitted_Group = str_split($Group);
+            $Splitted_Group = str_split($Group_String);
             foreach ($Splitted_Group as $Item_Type)
             {
                 $Possible_Badge_Array[$Item_Type] = 1;
@@ -58,11 +56,10 @@ function Find_Double_Item_Types($Group_Array): string
         {
             foreach ($Splitted_Group as $Item_Type)
             {
-                $Item_Type_Is_Double = str_contains($Group, $Item_Type);
+                $Item_Type_Is_Double = str_contains($Group_String, $Item_Type);
                 if ($Item_Type_Is_Double)
                 {
                     $Possible_Badge_Array[$Item_Type] += 1;
-                    break;
                 }
             }
         }
@@ -85,17 +82,18 @@ function Get_Priority_Value($Item_Type): int
     return $Priority;
 }
 
-$Priority_Score = 0;
+$Double_Item_Priority_Score = 0;
 
 $Input = Read_Input("input.txt");
-$Rucksack_Compartments_Array = Create_Rucksack_Array($Input);
+$Rucksack_Array = explode(PHP_EOL, $Input);
+$Rucksack_Compartments_Array = Seperate_Rucksack_Compartments($Rucksack_Array);
 foreach ($Rucksack_Compartments_Array as $Compartments_Array)
 {
     $Double_Item_Type = Find_Double_Item_Types($Compartments_Array);
     if ($Double_Item_Type) {
-        $Priority_Score += Get_Priority_Value($Double_Item_Type);
+        $Double_Item_Priority_Score += Get_Priority_Value($Double_Item_Type);
     }
 }
 
-printf("The sum of priorities of the item types that appear in both compartments of each rucksack is: %d." . PHP_EOL, $Priority_Score);
+printf("The sum of priorities of the item types that appear in both compartments of each rucksack is: %d." . PHP_EOL, $Double_Item_Priority_Score);
 
