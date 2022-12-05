@@ -61,6 +61,36 @@ function Execute_Improved_Rearrangement_Procedure($Starting_Stacks, $Rearrangeme
 
     return $New_Stacks;
 }
+
+function Print_Current_Stack_State($Stacks)
+{
+    $Max_Stack_Height = 0;
+    foreach ($Stacks as $Stack)
+    {
+        if ($Max_Stack_Height < sizeof($Stack))
+        {
+            $Max_Stack_Height = sizeof($Stack);
+        }
+    }
+
+    for ($BoxIndex = $Max_Stack_Height; $BoxIndex > -1; $BoxIndex--)
+    { 
+        for ($StackIndex = 0; $StackIndex < sizeof($Stacks); $StackIndex++)
+        {
+            $Stack = array_reverse($Stacks[$StackIndex]);
+            if (array_key_exists($BoxIndex, $Stack))
+            {
+                printf("[%s] ",  $Stack[$BoxIndex]);
+            } else
+            {
+                printf("    ");
+            }
+        }
+        printf(PHP_EOL);
+    }
+    printf(PHP_EOL);
+}
+
 function Get_String_Of_Top_Boxes($Stacks): string
 {
     $Box_String = "";
