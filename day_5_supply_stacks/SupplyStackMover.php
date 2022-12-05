@@ -43,6 +43,16 @@ function Execute_Rearrangement_Procedure($Starting_Stacks, $Rearrangement_Proced
     return $New_Stacks;
 }
 
+function Get_String_Of_Top_Boxes($Stacks): string
+{
+    $Box_String = "";
+    for ($Index = 0; $Index < sizeof($Stacks); $Index++) {
+        $Box_String .= array_shift($Stacks[$Index]);
+    }
+
+    return $Box_String;    
+}
+
 $Starting_Stacks_Drawing_Input = Read_Input("starting_stacks_drawing.txt");
 $Starting_Stacks_Drawing_Array = explode(PHP_EOL, $Starting_Stacks_Drawing_Input);
 $Starting_Stacks = Parse_Starting_Stacks($Starting_Stacks_Drawing_Array);
@@ -51,3 +61,6 @@ $Rearrangement_Procedure_Input = Read_Input("rearrangement_procedure.txt");
 $Rearrangement_Procedure_Array = explode(PHP_EOL, $Rearrangement_Procedure_Input);
 $New_Stacks = Execute_Rearrangement_Procedure($Starting_Stacks, $Rearrangement_Procedure_Array);
 
+$Box_String = Get_String_Of_Top_Boxes($New_Stacks);
+
+printf("The combined string of all the boxes at the top of each stack is: %s." . PHP_EOL, $Box_String);
