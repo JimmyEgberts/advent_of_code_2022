@@ -33,3 +33,4 @@ $Input = Read_Input("input.txt");
 $Assignment_Pairs_Array = explode(PHP_EOL, $Input);
 $Fully_Overlapping_Assignments = Get_Fully_Overlapping_Assignments($Assignment_Pairs_Array);
 
+printf("The amount of fully overlapping assignments is: %d." . PHP_EOL, $Fully_Overlapping_Assignments);
