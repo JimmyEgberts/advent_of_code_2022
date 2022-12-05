@@ -43,6 +43,24 @@ function Execute_Rearrangement_Procedure($Starting_Stacks, $Rearrangement_Proced
     return $New_Stacks;
 }
 
+function Execute_Improved_Rearrangement_Procedure($Starting_Stacks, $Rearrangement_Procedure_Array): array
+{
+    $New_Stacks = $Starting_Stacks;
+    foreach ($Rearrangement_Procedure_Array as $Rearrangement_Procedure) {
+        $Words = explode(' ', $Rearrangement_Procedure);
+        $Number_Of_Boxes = $Words[1];
+        $First_Stack_Index = $Words[3] - 1;
+        $Second_Stack_Index = $Words[5] - 1;
+
+        $Boxes = array_splice($New_Stacks[$First_Stack_Index], 0, $Number_Of_Boxes);
+        $Boxes = array_reverse($Boxes);
+        foreach ($Boxes as $Box) {
+            array_unshift($New_Stacks[$Second_Stack_Index], $Box);
+        }
+    }
+
+    return $New_Stacks;
+}
 function Get_String_Of_Top_Boxes($Stacks): string
 {
     $Box_String = "";
@@ -64,3 +82,11 @@ $New_Stacks = Execute_Rearrangement_Procedure($Starting_Stacks, $Rearrangement_P
 $Box_String = Get_String_Of_Top_Boxes($New_Stacks);
 
 printf("The combined string of all the boxes at the top of each stack is: %s." . PHP_EOL, $Box_String);
+
+// Part 2
+Print_Current_Stack_State($Starting_Stacks);
+
+$Improved_New_Stacks = Execute_Improved_Rearrangement_Procedure($Starting_Stacks, $Rearrangement_Procedure_Array);
+$Improved_Box_String = Get_String_Of_Top_Boxes($Improved_New_Stacks);
+
+printf("The combined string of all the boxes at the top of each stack after the improved rearrangement is: %s." . PHP_EOL, $Improved_Box_String);
